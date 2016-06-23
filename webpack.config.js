@@ -10,5 +10,31 @@ module.exports = function(webpackConfig) {
     }
   });
 
+  // Fix ie8 compatibility
+  webpackConfig.module.loaders.unshift({
+    test: /\.jsx?$/,
+    loader: 'es3ify-loader',
+  });
+
+  // build UMD files
+  webpackConfig.entry = {
+    index: './index.js',
+  };
+  webpackConfig.externals = {
+    react: {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react',
+    },
+  };
+  webpackConfig.output.library = 'componentStore';
+  webpackConfig.output.libraryTarget = 'umd';
+
+  webpackConfig.plugins = webpackConfig.plugins
+    .filter((plugin) => {
+      return !(plugin instanceof webpack.optimize.UglifyJsPlugin);
+    });
+
   return webpackConfig;
 };

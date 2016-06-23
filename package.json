@@ -9,12 +9,15 @@
     "url": "https://github.com/flutejs/component-store.git"
   },
   "main": "./lib/index",
+  "files": [
+    "lib"
+  ],
   "entry": {
     "index": "./index"
   },
   "scripts": {
-    "compile": "rm -rf lib && babel src --out-dir lib",
-    "build": "atool-build",
+    "build": "atool-build -o lib",
+    "pub": "npm run build && npm publish",
     "lint": "eslint --ext .js src",
     "test": "atool-test",
     "doc": "atool-doc",
@@ -34,6 +37,7 @@
     "babel-preset-react": "~6.5.0",
     "babel-preset-stage-0": "~6.5.0",
     "dora": "0.3.x",
+    "es3ify-loader": "^0.2.0",
     "eslint": "^2.5.3",
     "eslint-config-airbnb": "^6.2.0",
     "eslint-plugin-react": "^5.1.1",
