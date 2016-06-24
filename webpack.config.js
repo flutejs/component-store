@@ -1,6 +1,6 @@
 var webpack = require('atool-build/lib/webpack');
 
-module.exports = function(webpackConfig) {
+module.exports = function(webpackConfig, dev) {
 
   webpackConfig.plugins.some(function(plugin, i){
     if(plugin instanceof webpack.optimize.CommonsChunkPlugin) {
@@ -9,6 +9,11 @@ module.exports = function(webpackConfig) {
       return true;
     }
   });
+
+
+  if (dev) {
+    return webpackConfig;
+  }
 
   // Fix ie8 compatibility
   webpackConfig.module.loaders.unshift({
