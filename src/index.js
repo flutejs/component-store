@@ -13,6 +13,9 @@ export default (defaultStore = {}, name = 'onChange') => ClassA => class extends
       ...this.nextStore,
     });
   }
+  componentWillReceiveProps(nextProps) {
+    this.nextStore = nextProps;
+  }
   render() {
     const diffStore = {};
     Object.keys(this.nextStore).forEach(key => {
